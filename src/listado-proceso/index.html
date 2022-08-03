@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="author" content="Victor Rodriguez">
+        <meta name="description" content="Sistema Producción CODAN">
+
+        <title>Sistema Producción CODAN</title>
+
+        <script src="../../libs/jquery-3.6.0/jquery.min.js"></script>
+        <script src="../../libs/bootstrap-5.2.0/bootstrap.min.js"></script>
+
+        <link rel="stylesheet" href="../../libs/bootstrap-5.2.0/bootstrap.min.css"/>
+        <link rel="stylesheet" href="./style.css"/>
+    </head>
+    <body>
+        <div class="container text-center">
+            <div class="my-5">
+                <h1>Listado de Procesos de Producción</h1>
+                <h3 class="mt-4">Búsqueda de Incidencias</h3>
+            </div>
+
+            <div class="row">
+                <select id="tipo-busqueda" class="col form-select">
+                    <option id="busqueda-incidencia" selected>
+                        Incidencia (ID)
+                    </option>
+                </select>
+
+                <label class="col-7">
+                    <input id="termino-busqueda" class="col form-control" placeholder="Término de búsqueda">
+                </label>
+
+                <button id="buscar" class="col btn btn-primary mx-1">
+                    Buscar
+                </button>
+
+                <button id="volver" class="col btn btn-danger">
+                    Volver
+                </button>
+            </div>
+
+            <div id="disclaimer-container" class="row bg-light border rounded-2">
+                <div id="disclaimer" class="d-flex align-items-center justify-content-center">
+                    <h5>No se ha encontrado ningún proceso con ese término</h5>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="./script.js"></script>
+</html>

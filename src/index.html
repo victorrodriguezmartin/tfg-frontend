@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="author" content="Victor Rodriguez">
+        <meta name="description" content="Sistema Producción CODAN">
+
+        <title>Sistema Producción CODAN</title>
+
+        <script src="../libs/jquery-3.6.0/jquery.min.js"></script>
+        <script src="../libs/bootstrap-5.2.0/bootstrap.min.js"></script>
+
+        <link rel="stylesheet" href="../libs/bootstrap-5.2.0/bootstrap.min.css"/>
+    </head>
+    <body>
+        <div class="container text-center">
+
+            <div class="mt-5">
+                <h1>¡Bienvenido al Sistema de Producción de CODAN!</h1>
+                <h3 class="mt-4">¿Desea empezar un nuevo proceso de producción?</h3>
+            </div>
+
+            <div class="mt-5">
+                <button id="nuevo-proceso" class="col btn btn-primary">
+                    Nuevo Proceso
+                </button>
+                <button id="listado-proceso" class="col btn btn-primary">
+                    Listado Procesos Anteriores
+                </button>
+            </div>
+        </div>
+        <script>
+            $(document).ready(function()
+            {
+                $("#nuevo-proceso").on("click", function (e)
+                {
+                    e.preventDefault();
+                    window.location.replace("http://localhost/frontend/src/nuevo-proceso/index.html");
+                });
+
+                $("#listado-proceso").on("click", function (e)
+                {
+                    e.preventDefault();
+                    window.location.replace("http://localhost/frontend/src/listado-proceso/index.html");
+                });
+            });
+        </script>
+    </body>
+</html>
