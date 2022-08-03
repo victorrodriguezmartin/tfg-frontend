@@ -108,8 +108,7 @@ $(document).ready(function()
 
     function validarHora(hora)
     {
-        if (hora == "00") return false;
-        return new RegExp("^([0-1][0-9])|(2[0-3]):[0-5][0-9]$").test(hora);
+        return new RegExp("^(([0-1][0-9])|(2[0-3])):[0-5][0-9]$").test(hora);
     }
 
     function validarDiferenciaHoraria(hParada, hReinicio)
