@@ -67,7 +67,7 @@ $(document).ready(function()
             lista += "}";
         }
 
-        window.location.replace("http://localhost/frontend/cerrarProduccion.html?" + 
+        window.location.replace("http://localhost/frontend/src/terminar-proceso/index.html?" + 
             "&jefe=" + findParameter("jefe") + 
             "&linea=" + findParameter("linea") +
             "&producto=" + findParameter("producto") +
