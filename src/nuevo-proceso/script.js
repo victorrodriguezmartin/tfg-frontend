@@ -4,7 +4,7 @@ $(document).ready(function()
     const BANNER_ERROR = "alert-danger";
     const BANNER_SUCCESS = "alert-success";
 
-    const INVALID_INPUT_MESSAGE = "Todos los campos tienen que tener un valor!";
+    const INVALID_INPUT = "Todos los campos tienen que tener un valor!";
 
     $("#fecha").val(getDate());
     $("#hora").val(getTime());
@@ -39,7 +39,7 @@ $(document).ready(function()
     $("#proceso-incidencia").on("click", function (e)
     {
         if (!validateInput())
-            return displayBanner(BANNER_ERROR, INVALID_INPUT_MESSAGE);
+            return displayBanner(BANNER_ERROR, INVALID_INPUT);
 
         var selectJefeEquipo = $("#select-jefe option:selected").text().trim();
         var selectLinea = $("#select-linea option:selected").text().trim();
@@ -56,7 +56,7 @@ $(document).ready(function()
     $("#proceso-peso").on("click", function (e)
     {
         if (!validateInput())
-            return displayBanner(BANNER_ERROR, INVALID_INPUT_MESSAGE);
+            return displayBanner(BANNER_ERROR, INVALID_INPUT);
     });
 
     $("#cancelar-proceso").on("click", function (e)
