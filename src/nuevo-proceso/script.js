@@ -13,6 +13,9 @@ $(document).ready(function()
     {
         var id = $(this).attr("id");
 
+        if (isSelectEmpty($(this)))
+            hideBanner();
+
         if (id == "select-jefe")
         {
             var values = httpGetRequest(getRequestURL("getJefes"));
@@ -25,12 +28,29 @@ $(document).ready(function()
             populateSelect($(this), values, "codigo");
         }
 
+        if (id == "select-producto")
+        {
+            var values = httpGetRequest(getRequestURL("getProductos"));
+            populateSelect($(this), values, "codigo");
+        }
+
     });
 
     $("#proceso-incidencia").on("click", function (e)
     {
         if (!validateInput())
             return displayBanner(BANNER_ERROR, INVALID_INPUT_MESSAGE);
+
+        var selectJefeEquipo = $("#select-jefe option:selected").text().trim();
+        var selectLinea = $("#select-linea option:selected").text().trim();
+        var selectProducto = $("#select-producto option:selected").text().trim();
+
+        window.location.replace("http://localhost/frontend/src/proceso-incidencia/index.html?" + 
+            "&jefe=" + selectJefeEquipo.replace(" ", "_") + 
+            "&linea=" + selectLinea.replace(" ", "_") +
+            "&producto=" + selectProducto.replace(" ", "_") +
+            "&fecha=" + $("#fecha").val().replace(" ", "_") +
+            "&hora=" + $("#hora").val().replace(" ", "_"));
     });
 
     $("#proceso-peso").on("click", function (e)
@@ -57,7 +77,9 @@ $(document).ready(function()
 
     function validateInput()
     {
-        return false;
+        return (!isSelectEmpty($("#select-jefe")) &&
+                !isSelectEmpty($("#select-linea")) &&
+                !isSelectEmpty($("#select-producto")));
     }
 
     function populateSelect(select, values, key)
@@ -97,7 +119,7 @@ $(document).ready(function()
 
     function isSelectEmpty(select)
     {
-        return select.find(".select-placeholder").length !== 0;
+        return !select.val();
     }
 
     function getRequestURL(request)
@@ -115,37 +137,3 @@ $(document).ready(function()
         return httpGetRequest("http://localhost/backend/Server.php?request=getTime")["data"];
     }
 });
-
-// $("select").on("click", function(e)
-// {
-//     var selectId = $(this).attr("id");
-//     var field = "";
-//     var url = "http://localhost/backend/Server.php?request=";
-//     var id = "";
-    
-//     if (isSelectEmpty(selectId))
-//         removeBanner();
-
-//     if (selectId == "select-jefe")
-//     {
-//         url += "selectJefe";
-//         id="id_empleado";
-//         field = "nombre";
-//     };
-
-//     if (selectId == "select-linea")
-//     {
-//         url += "selectLinea";
-//         id="id_linea";
-//         field = "codigo";
-//     };
-
-//     if (selectId == "select-producto")
-//     {
-//         url += "selectProducto";
-//         id="id_producto";
-//         field = "nombre";
-//     };
-
-//     selectOpen(selectId, url, id, field);
-// });
