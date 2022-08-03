@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="author" content="Victor Rodriguez">
+        <meta name="description" content="Sistema Producción CODAN">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Producción con Incidencia</title>
+
+        <script src="../../libs/jquery-3.6.0/jquery.min.js"></script>
+        <script src="../../libs/bootstrap-5.2.0/bootstrap.min.js"></script>
+
+        <link rel="stylesheet" href="../../libs/bootstrap-5.2.0/bootstrap.min.css"/>
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="my-5 text-center">
+                <h1>Proceso de Producción</h1>
+                <h3 class="mt-4">Inciencia</h3>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <div id="banner" class="alert invisible">
+                        <span>Placeholder</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-8">
+                    <div class="row">
+                        <div class="col">
+                            <label for="descripcionIncidencia">Descripción Incidencia</label>
+                            <input id="descripcionIncidencia" type="text" class="form-control" placeholder="Explica brevemente que ha ocurrido">
+                        </div>
+                    </div>
+                    
+                    <div class="row mt-3">
+                        <div class="col">
+                            <label for="horaParada">Hora de Parada de Producción</label>
+                            <input id="horaParada" type="text" class="form-control" placeholder="HH:mm">
+                        </div>
+                        <div class="col">
+                            <label for="horaReinicio">Hora de Reinicio de Producción</label>
+                            <input id="horaReinicio" type="text" class="form-control" placeholder="HH:mm">
+                        </div>
+                    </div>
+                    
+                    <div class="row mt-4">
+                        <div class="col">
+                            <button id="guardar-incidencia" class="btn btn-primary" type="submit">
+                                Guardar Incidencia
+                            </button>
+                            <button id="cerrar-formulario" class="btn btn-secondary" type="submit">
+                                Cerrar Formulario
+                            </button>
+                            <button id="cancelar-formulario" class="btn btn-danger" type="submit">
+                                Cancelar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                    
+                <div id="listaIncidencias" class="col-4 mt-4 bg-light border rounded-2" style="overflow:scroll;height:50vh;max-height:50vh;">
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="./script.js"></script>
+</html>
