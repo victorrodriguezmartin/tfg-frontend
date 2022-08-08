@@ -12,21 +12,19 @@
         <script src="../../libs/jquery-3.6.0/jquery.min.js"></script>
         <script src="../../libs/bootstrap-5.2.0/bootstrap.min.js"></script>
 
-        <link rel="stylesheet" href="../../libs/bootstrap-5.2.0/bootstrap.min.css"/>
         <link rel="stylesheet" href="./style.css"/>
+        <link rel="stylesheet" href="../../libs/bootstrap-5.2.0/bootstrap.min.css"/>
     </head>
     <body>
-        <div class="container text-center">
-            <div class="my-5">
+        <div class="container">
+            <div class="my-5 text-center">
                 <h1>Listado de Procesos de Producción</h1>
                 <h3 class="mt-4">Búsqueda de Incidencias</h3>
             </div>
 
             <div class="row">
                 <select id="tipo-busqueda" class="col form-select">
-                    <option id="busqueda-incidencia" selected>
-                        Incidencia (ID)
-                    </option>
+                    <option id="busqueda-id-personalizado">ID Proceso</option>
                 </select>
 
                 <label class="col-7">
@@ -41,13 +39,70 @@
                     Volver
                 </button>
             </div>
-
-            <div id="disclaimer-container" class="row bg-light border rounded-2">
-                <div id="disclaimer" class="d-flex align-items-center justify-content-center">
-                    <h5>No se ha encontrado ningún proceso con ese término</h5>
-                </div>
+            
+            <div id="list" class="row bg-light border rounded-2">
+                
             </div>
         </div>
     </body>
     <script src="./script.js"></script>
 </html>
+
+<!--
+<div class="entrada-lista text-left my-3 mb-4">
+    <div class="info-proceso">
+        <div class="row">
+            <div class="col">
+                <span class="h4">ID: Azul</span>
+            </div>
+            <div class="col">
+                <p>Hora Inicio: </p>
+                <p>Hora Fin: </p>
+            </div>
+            <div class="col">
+                <p>Jefe: </p>
+                <p>Linea: </p>
+                <p>Producto: </p>
+            </div>
+            <div class="col">
+                <p>Kilos Reales: </p>
+                <p>Kilos Teoricos: </p>
+                <p>Coeficiente: </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="lista-proceso">
+        <div class="row">
+            <span class="h5">Incidencias Proceso Produccion</span>
+        </div>
+        
+        <div class="entrada-lista-proceso">
+            <div class="row my-3">
+                <span class="col-1"></span>
+                <div class="col-2">
+                    <span>1</span>
+                </div>
+                <div class="col-9">
+                    <p>Descripcion:</p>
+                </div>
+            </div>
+            
+            <div class="row my-3">
+                <span class="col-3"></span>
+                <div class="col-3">
+                    <p>Fecha Parada: </p>
+                </div>
+                <div class="col-3">
+                    <p>Fecha Reinicio: </p>
+                </div>
+                <div class="col-3">
+                    <p>Minutos Perdidos: </p>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+<hr />
+-->

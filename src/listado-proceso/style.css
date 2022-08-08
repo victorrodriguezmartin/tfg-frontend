@@ -1,15 +1,11 @@
 
-#disclaimer-container
+#list
 {
     height: 60vh;
+    min-height: 60vh;
     max-height: 60vh;
 
     margin-top: 1vh;
 
     overflow: scroll;
-}
-
-#disclaimer
-{
-    height: 100%;
 }
