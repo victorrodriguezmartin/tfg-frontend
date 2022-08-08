@@ -124,16 +124,16 @@ $(document).ready(function()
 
     function getRequestURL(request)
     {
-        return "http://localhost/backend/Server.php?request=" + request;
+        return "http://localhost/backend/src/Server.php?request=" + request;
     }
 
     function getDate()
     {
-        return httpGetRequest("http://localhost/backend/Server.php?request=getDate")["data"];
+        return httpGetRequest("http://localhost/backend/src/Server.php?request=getDate")["data"];
     }
 
     function getTime()
     {
-        return httpGetRequest("http://localhost/backend/Server.php?request=getTime")["data"];
+        return httpGetRequest("http://localhost/backend/src/Server.php?request=getTime")["data"];
     }
 });

@@ -29,7 +29,7 @@ $(document).ready(function()
         if (listaIncidencias.length > 0)
         {
             $.ajax({
-                url: 'http://localhost/backend/Server.php',
+                url: 'http://localhost/backend/src/Server.php',
                 data: {
                     request: "nuevoProceso",
                     linea: findParameter("linea"),
