@@ -72,7 +72,8 @@ $(document).ready(function()
             "&linea=" + findParameter("linea") +
             "&producto=" + findParameter("producto") +
             "&fecha=" + findParameter("fecha") +
-            "&hora=" + findParameter("hora") + lista);
+            "&hora=" + findParameter("hora") +
+            "&lista=" + lista);
     });
 
     $("#cancelar-formulario").on("click", function(e)
