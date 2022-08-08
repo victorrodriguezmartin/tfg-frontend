@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <meta charset="utf-8">
+    <meta name="author" content="Victor Rodriguez">
+    <meta name="description" content="Sistema Producción CODAN">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Cerrar Proceso de Producción</title>
+
+    <script src="../../libs/jquery-3.6.0/jquery.min.js"></script>
+    <script src="../../libs/bootstrap-5.2.0/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="../../libs/bootstrap-5.2.0/bootstrap.min.css"/>
+</head>
+    <div class="container">
+        <div class="my-5 text-center">
+            <h1>Proceso de Producción</h1>
+            <h3 class="mt-4">Cierre</h3>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div id="banner" class="alert invisible">
+                    <span>Placeholder</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-8">
+                <div class="row">
+                    <div class="col">
+                        <label for="idPersonalizado">Identificador Personalizado (Opcional)</label>
+                        <input id="idPersonalizado" type="text" class="form-control" placeholder="Introduce un ID para identificar esta sesión de producción">
+                    </div>
+                </div>
+                
+                <div class="row mt-3">
+                    <div class="col">
+                        <label for="kilosTeoricos">Kilos Teóricos</label>
+                        <input id="kilosTeoricos" type="text" class="form-control" placeholder="Kg">
+                    </div>
+                    <div class="col">
+                        <label for="kilosReales">Kilos Reales</label>
+                        <input id="kilosReales" type="text" class="form-control" placeholder="Kg">
+                    </div>
+                </div>
+                
+                <div class="row mt-4">
+                    <div class="col">
+                        <button id="finalizar-proceso" class="btn btn-primary" type="submit">
+                            Finalizar Proceso
+                        </button>
+                        <button id="cancelar-proceso" class="btn btn-danger" type="submit">
+                            Cancelar
+                        </button>
+                    </div>
+                </div>
+            </div>
+                
+            <div id="listaIncidencias" class="col-4 mt-4 bg-light border rounded-2" style="overflow:scroll;height:50vh;max-height:50vh;">
+            </div>
+        </div>
+    </div>
+    <script src="./script.js"></script>
+    </body>
+</html>
+
