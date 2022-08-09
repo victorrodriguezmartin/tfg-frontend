@@ -1,17 +1,28 @@
 
 $(document).ready(function()
 {
-
-    const GET_ALL_PROCESOS = "http://localhost/backend/src/Server.php?request=getAllProcesos";
     const GET_INCIDENCIAS = "http://localhost/backend/src/Server.php?request=getIncidencia";
+    const GET_ALL_PROCESOS = "http://localhost/backend/src/Server.php?request=getAllProcesos";
+    const GET_PROCESO_BY_ID = "http://localhost/backend/src/Server.php?request=getProcesoById&id=";
+
+    var values = httpGetRequest(GET_ALL_PROCESOS);
+    if (values) $("#list").append(crearEntradaLista(values));
 
     $("#buscar").on("click", function (e)
     {
         vaciarLista();
 
-        var values = httpGetRequest(GET_ALL_PROCESOS);
+        var opcionSeleccionada = $("#tipo-busqueda").val();
 
-        if (values)
+        if (!$("#termino-busqueda").val())
+            values = httpGetRequest(GET_ALL_PROCESOS);
+        else
+        {
+            if (opcionSeleccionada == "busqueda-id-personalizado")
+                values = httpGetRequest(GET_PROCESO_BY_ID + $("#termino-busqueda").val());
+        }
+        
+        if ((values["code"] == 200) && (values["data"].length > 0))
             $("#list").append(crearEntradaLista(values));
         else
             displayDisclaimer();
@@ -53,7 +64,7 @@ $(document).ready(function()
                       "    <div class='info-proceso'>" +
                       "        <div class='row'>" +
                       "            <div class='col'>"+
-                      "                <span class='h4'>ID: " + idPersonalizado + "</span>" +
+                      "                <span class='h5'>ID: " + idPersonalizado + "</span>" +
                       "            </div>" +
                       "            <div class='col'>" +
                       "                <p>Hora Inicio: " + horaInicio + "</p>" +
@@ -87,7 +98,7 @@ $(document).ready(function()
         var index = 0;
         var result = "";
 
-        if (incidencias.data)
+        if (incidencias.data.length > 0)
         {
             result += "<div class='lista-proceso'>" +
                       "    <div class='row'>" +
@@ -119,7 +130,7 @@ $(document).ready(function()
                         "        </div>" +
                         "        <div class='col-3'>" +
                         "            <p>Minutos Perdidos: " +
-                                         calcularMinutos(horaParada, horaReinicio) +
+                                         calcularMinutosPerdidos(horaParada, horaReinicio) +
                         "            </p>" +
                         "        </div>" +
                         "    </div>" +
@@ -145,9 +156,12 @@ $(document).ready(function()
         $("#list").empty();
     }
 
-    function calcularMinutos(horaParada, horaReinicio)
+    function calcularMinutosPerdidos(horaParada, horaReinicio)
     {
-        return "a";
+        horaParada = new Date(horaParada);
+        horaReinicio = new Date(horaReinicio);
+        
+        return Math.abs(parseInt((horaParada.getTime() - horaReinicio.getTime()) / 60000));
     }
 
     function calcularEficiencia(kilosReales, kilosTeoricos)
