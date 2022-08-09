@@ -27,7 +27,11 @@ $(document).ready(function()
 
     $("#descarga").on("click", function (e)
     {
-        console.log(JSON.stringify(values.data));
+        var data = JSON.stringify(values.data);
+
+        if (data && data.length > 0)
+            window.location.replace("http://localhost/frontend/src/listado-proceso/descarga.html?data=" + data);
+        else displayDisclaimer();
     });
     
     $("#volver").on("click", function (e)
@@ -146,9 +150,7 @@ $(document).ready(function()
 
     function displayDisclaimer()
     {
-        var disclaimerCss = "d-flex align-items-center justify-content-center";
-
-        $("#list").append($("<div id='disclaimer' class='" + disclaimerCss + "'>" +
+        $("#list").append($("<div id='disclaimer' class='d-flex align-items-center justify-content-center'>" +
                             "   <h5>No se ha encontrado ningúna entrada con ese término</h5>" +
                             "</div>"));
     }
