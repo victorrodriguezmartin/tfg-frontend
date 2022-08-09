@@ -26,36 +26,32 @@ $(document).ready(function()
         if (!validarKilos($("#kilosTeoricos").val()) || !validarKilos($("#kilosReales").val()))
             return displayBanner(BANNER_ERROR, BANNER_INVALID_KILO_INPUT);
 
-        if (listaIncidencias.length > 0)
-        {
-            $.ajax({
-                url: 'http://localhost/backend/src/Server.php',
-                data: {
-                    request: "nuevoProceso",
-                    linea: findParameter("linea"),
-                    producto: findParameter("producto"),
-                    jefe: findParameter("jefe"),
-                    kilosTeoricos: $("#kilosTeoricos").val(),
-                    kilosReales: $("#kilosReales").val(),
-                    idPersonalizado: $("#idPersonalizado").val(),
-                    lista: listaIncidencias,
-                    fecha: findParameter("fecha"),
-                    horaInicio: findParameter("hora")
-                },
-                type: 'post',
-                success: function(result)
-                {
-                    result = JSON.parse(result);
+        $.ajax({
+            url: 'http://localhost/backend/src/Server.php',
+            data: {
+                request: "nuevoProceso",
+                linea: findParameter("linea"),
+                producto: findParameter("producto"),
+                jefe: findParameter("jefe"),
+                kilosTeoricos: $("#kilosTeoricos").val(),
+                kilosReales: $("#kilosReales").val(),
+                idPersonalizado: $("#idPersonalizado").val(),
+                lista: listaIncidencias,
+                fecha: findParameter("fecha"),
+                horaInicio: findParameter("hora")
+            },
+            type: 'post',
+            success: function(result)
+            {
+                result = JSON.parse(result);
 
-                    if (result.code == 200)
-                        window.location.replace("http://localhost/frontend/src/");
-                    else
-                        if (result.data.includes("1062"))
-                            displayBanner(BANNER_ERROR, BANNER_DUPLICATE_ID_INPUT);
-                    
-                }
-            });
-        }
+                if (result.code == 200)
+                    window.location.replace("http://localhost/frontend/src/");
+                else
+                    if (result.data.includes("1062"))
+                        displayBanner(BANNER_ERROR, BANNER_DUPLICATE_ID_INPUT);
+            }
+        });
     });
 
     $("#cancelar-proceso").on("click", function(e)
