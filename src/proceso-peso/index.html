@@ -11,8 +11,7 @@
 
         <script src="../../libs/jquery-3.6.0/jquery.min.js"></script>
         <script src="../../libs/bootstrap-5.2.0/bootstrap.min.js"></script>
-
-        <link rel="stylesheet" href="./style.css"/>
+        
         <link rel="stylesheet" href="../../libs/bootstrap-5.2.0/bootstrap.min.css"/>
     </head>
     <body>
@@ -29,17 +28,154 @@
                     </div>
                 </div>
             </div>
-
+            
             <div class="row">
-                <div class="col-8">
+                <div class="col-9">
+                    <div class="row">
+                        <div class="col-8">
+                            <label for="idPersonalizado">Identificador Personalizado (Opcional)</label>
+                            <input id="idPersonalizado" type="text" class="form-control" placeholder="Introduce un ID para identificar esta sesión de producción">
+                        </div>
+                        <div class="col">
+                            <label for="hora">Hora final</label>
+                            <input id="hora" type="text" class="form-control" placeholder="HH:mm">
+                        </div>
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col">
+                            <label for="pesoProduccion">Peso Producción</label>
+                            <input id="pesoProduccion" type="text" class="form-control" placeholder="g">
+
+                            <div class="mt-2">
+                                <label for="numeroUnidades">Numero unidades/cubeta</label>
+                                <input id="numeroUnidades" type="text" class="form-control" placeholder="Nº unidades">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <label for="pesoBobina">Peso Bobina</label>
+                            <input id="pesoBobina" type="text" class="form-control" placeholder="g">
+
+                            <div class="mt-2">
+                                <label for="pesoTotalBobina">Peso Total Bobina</label>
+                                <input id="pesoTotalBobina" type="text" class="form-control" placeholder="g">
+                            </div>
+                        </div>
+                        
+                        <div class="col">
+                            <label for="numeroCubetas">Numero Cubetas a Pesar</label>
+                            <input id="numeroCubetas" type="text" class="form-control" placeholder="Nº unidades">
+
+                            <div class="mt-2">
+                                <label for="pesoCubeta">Peso Cubeta</label>
+                                <input id="pesoCubeta" type="text" class="form-control" placeholder="g">
+                            </div>
+                            
+                            <div class="mt-2">
+                                <label for="pesoBobinaCubeta">Peso Cubina Bobina</label>
+                                <input id="pesoBobinaCubeta" type="text" class="form-control" placeholder="g">
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <label for="pesoUnitarioObjetivo">Peso objetivo</label>
+                            <input id="pesoUnitarioObjetivo" type="text" class="form-control" placeholder="g">
+
+                            <div class="mt-2">
+                                <label for="margenSobrepeso">Margen de sobrepeso</label>
+                                <input id="margenSobrepeso" type="text" class="form-control" placeholder="%">
+                            </div>
+
+                            <div class="mt-2">
+                                <label for="margenSubpeso">Margen legal subpeso</label>
+                                <input id="margenSubpeso" type="text" class="form-control" placeholder="g">
+                            </div>
+                        </div>
+                    </div>
+                    
                     <div class="row mt-4">
                         <div class="col">
+                            <button id="guardar-peso" class="btn btn-primary" type="submit">
+                                Guardar Pesos
+                            </button>
+
+                            <button id="reestablecer-valores" class="btn btn-secondary" type="submit">
+                                Reestablecer Valores
+                            </button>
+
                             <button id="cancelar-formulario" class="btn btn-danger" type="submit">
                                 Cancelar
                             </button>
                         </div>
                     </div>
                 </div>
+
+                <div class="col">
+                    <label class="sr-only" for="inlineFormInputGroup">Tolerancia Pesos</label>
+
+                    <div class="col input-group mb-2">
+                        <div class="col-5">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text rounded-0 justify-content-center">5 - 50g</div>
+                            </div>
+                        </div>
+                        <input id="tolerancia-1" type="text" class="form-control rounded-left-0" placeholder="%">
+                    </div>
+
+                    <div class="col input-group mb-2">
+                        <div class="col-5">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text rounded-0 justify-content-center">51 - 100g</div>
+                            </div>
+                        </div>
+                        <input id="tolerancia-2" type="text" class="form-control rounded-left-0" placeholder="%">
+                    </div>
+
+                    <div class="col input-group mb-2">
+                        <div class="col-5">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text rounded-0 justify-content-center">101 - 200g</div>
+                            </div>
+                        </div>
+                        <input id="tolerancia-3" type="text" class="form-control rounded-left-0" placeholder="%">
+                    </div>
+
+                    <div class="col input-group mb-2">
+                        <div class="col-5">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text rounded-0 justify-content-center">201 - 300g</div>
+                            </div>
+                        </div>
+                        <input id="tolerancia-4" type="text" class="form-control rounded-left-0" placeholder="%">
+                    </div>
+
+                    <div class="col input-group mb-2">
+                        <div class="col-5">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text rounded-0 justify-content-center">301 - 500g</div>
+                            </div>
+                        </div>
+                        <input id="tolerancia-5" type="text" class="form-control rounded-left-0" placeholder="%">
+                    </div>
+
+                    <div class="col input-group mb-2">
+                        <div class="col-5">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text rounded-0 justify-content-center">501 - 1000g</div>
+                            </div>
+                        </div>
+                        <input id="tolerancia-6" type="text" class="form-control rounded-left-0" placeholder="%">
+                    </div>
+
+                    <div class="col input-group mb-2">
+                        <div class="col-5">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text rounded-0 justify-content-center">1001 - 10000g</div>
+                            </div>
+                        </div>
+                        <input id="tolerancia-7" type="text" class="form-control rounded-left-0" placeholder="%">
+                    </div>
+                </div>
+
             </div>
         </div>
     </body>
