@@ -1,16 +1,14 @@
 
 $(document).ready(function()
 {
-    const GET_ALL_PROCESOS = "http://localhost/backend/src/Server.php?request=getAllProcesos";
+    const GET_ALL_PROCESOS = "http://localhost/backend/src/Server.php?request=getProcesos";
     const GET_PROCESO_BY_ID = "http://localhost/backend/src/Server.php?request=getProcesoById&id=";
-    const GET_INCIDENCIAS_BY_ID = "http://localhost/backend/src/Server.php?request=getIncidencia&id=";
+    const GET_INCIDENCIAS_BY_ID = "http://localhost/backend/src/Server.php?request=getIncidenciasProcesoById&id=";
 
     var values = "";
 
     $("#buscar").on("click", function (e)
     {
-        vaciarLista();
-
         var opcionSeleccionada = $("#tipo-busqueda").val();
 
         if (!$("#termino-busqueda").val())
@@ -150,6 +148,8 @@ $(document).ready(function()
 
     function displayDisclaimer()
     {
+        $("#list").empty();
+
         $("#list").append($("<div id='disclaimer' class='d-flex align-items-center justify-content-center'>" +
                             "   <h5>No se ha encontrado ningúna entrada con ese término</h5>" +
                             "</div>"));
@@ -158,11 +158,6 @@ $(document).ready(function()
     function resultadoValido(resultado)
     {
         return (resultado["code"] == 200) && (resultado["data"].length > 0);
-    }
-
-    function vaciarLista()
-    {
-        $("#list").empty();
     }
 
     function calcularMinutosPerdidos(horaParada, horaReinicio)
