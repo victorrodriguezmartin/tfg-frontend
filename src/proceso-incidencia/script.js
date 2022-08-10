@@ -67,7 +67,7 @@ $(document).ready(function()
             lista += "}";
         }
 
-        window.location.replace("http://localhost/frontend/src/terminar-proceso/index.html?" + 
+        window.location.replace("http://localhost/frontend/src/proceso-incidencia/terminar-proceso.html?" + 
             "&jefe=" + findParameter("jefe") + 
             "&linea=" + findParameter("linea") +
             "&producto=" + findParameter("producto") +
