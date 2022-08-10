@@ -29,7 +29,7 @@ $(document).ready(function()
         $.ajax({
             url: 'http://localhost/backend/src/Server.php',
             data: {
-                request: "nuevoProceso",
+                request: "addProceso",
                 linea: findParameter("linea"),
                 producto: findParameter("producto"),
                 jefe: findParameter("jefe"),
@@ -47,9 +47,10 @@ $(document).ready(function()
 
                 if (result.code == 200)
                     window.location.replace("http://localhost/frontend/src/");
+                else if (result.data.includes("1062"))
+                    displayBanner(BANNER_ERROR, BANNER_DUPLICATE_ID_INPUT);
                 else
-                    if (result.data.includes("1062"))
-                        displayBanner(BANNER_ERROR, BANNER_DUPLICATE_ID_INPUT);
+                    displayBanner(BANNER_ERROR, result.data);
             }
         });
     });
