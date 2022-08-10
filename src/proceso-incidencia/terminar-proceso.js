@@ -29,7 +29,7 @@ $(document).ready(function()
         $.ajax({
             url: 'http://localhost/backend/src/Server.php',
             data: {
-                request: "addProceso",
+                request: "addProcesoIncidencia",
                 linea: findParameter("linea"),
                 producto: findParameter("producto"),
                 jefe: findParameter("jefe"),
