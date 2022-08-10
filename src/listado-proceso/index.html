@@ -23,11 +23,44 @@
             </div>
 
             <div class="row">
-                <select id="tipo-busqueda" class="col form-select">
-                    <option value="busqueda-id-personalizado">ID Proceso</option>
+                <div class="col-3">
+                    <select id="tipo-busqueda" class="form-select col">
+                        <option value="busqueda-incidencias">Proceso con Incidencia</option>
+                        <option value="busqueda-peso">Proceso por Peso</option>
+                    </select>
+                </div>
+
+                <div class="col-5">
+                    <input id="termino-busqueda" class="col form-control" placeholder="Término de búsqueda">
+                </div>    
+
+                <div class="col-4">
+                    <button id="buscar" class="col btn btn-primary">
+                        Buscar
+                    </button>
+                    <button id="descarga" class="col btn btn-secondary mx-1">
+                        Descargar
+                    </button>
+                    <button id="volver" class="col btn btn-danger">
+                        Volver
+                    </button>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col">
+                    <div id="list" class="row bg-light border rounded-2">
+                    </div>
+                </div>
+            </div>            
+
+            <!-- <div class="row">
+                <select id="tipo-busqueda" class="form-select col">
+                    <option value="busqueda-incidencias">Proceso con Incidencia</option>
+                    <option value="busqueda-peso">Proceso por Peso</option>
                 </select>
 
-                <label class="col-7">
+                <label class="col">
                     <input id="termino-busqueda" class="col form-control" placeholder="Término de búsqueda">
                 </label>
 
@@ -45,68 +78,8 @@
             </div>
             
             <div id="list" class="row bg-light border rounded-2">
-                
-            </div>
+            </div> -->
         </div>
     </body>
     <script src="./script.js"></script>
 </html>
-
-<!--
-<div class="entrada-lista text-left my-3 mb-4">
-    <div class="info-proceso">
-        <div class="row">
-            <div class="col">
-                <span class="h4">ID: Azul</span>
-            </div>
-            <div class="col">
-                <p>Hora Inicio: </p>
-                <p>Hora Fin: </p>
-            </div>
-            <div class="col">
-                <p>Jefe: </p>
-                <p>Linea: </p>
-                <p>Producto: </p>
-            </div>
-            <div class="col">
-                <p>Kilos Reales: </p>
-                <p>Kilos Teoricos: </p>
-                <p>Coeficiente: </p>
-            </div>
-        </div>
-    </div>
-
-    <div class="lista-proceso">
-        <div class="row">
-            <span class="h5">Incidencias Proceso Produccion</span>
-        </div>
-        
-        <div class="entrada-lista-proceso">
-            <div class="row my-3">
-                <span class="col-1"></span>
-                <div class="col-2">
-                    <span>1</span>
-                </div>
-                <div class="col-9">
-                    <p>Descripcion:</p>
-                </div>
-            </div>
-            
-            <div class="row my-3">
-                <span class="col-3"></span>
-                <div class="col-3">
-                    <p>Fecha Parada: </p>
-                </div>
-                <div class="col-3">
-                    <p>Fecha Reinicio: </p>
-                </div>
-                <div class="col-3">
-                    <p>Minutos Perdidos: </p>
-                </div>
-            </div>
-        </div>
-        
-    </div>
-</div>
-<hr />
--->

@@ -1,6 +1,11 @@
 
-#list
-{
+button {
+    width: 31%;
+    min-width: 31%;
+    max-width: 31%;
+}
+
+#list {
     height: 60vh;
     min-height: 60vh;
     max-height: 60vh;
@@ -10,7 +15,9 @@
     overflow: scroll;
 }
 
-.entrada-lista
-{
+.entrada-lista {
     height: auto;
 }
+
+
+
