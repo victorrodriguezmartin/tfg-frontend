@@ -57,6 +57,17 @@ $(document).ready(function()
     {
         if (!validateInput())
             return displayBanner(BANNER_ERROR, INVALID_INPUT);
+        
+        var selectJefeEquipo = $("#select-jefe option:selected").text().trim();
+        var selectLinea = $("#select-linea option:selected").text().trim();
+        var selectProducto = $("#select-producto option:selected").text().trim();
+
+        window.location.replace("http://localhost/frontend/src/proceso-peso/index.html?" + 
+            "&jefe=" + selectJefeEquipo.replace(" ", "_") + 
+            "&linea=" + selectLinea.replace(" ", "_") +
+            "&producto=" + selectProducto.replace(" ", "_") +
+            "&fecha=" + $("#fecha").val().replace(" ", "_") +
+            "&hora=" + $("#hora").val().replace(" ", "_"));
     });
 
     $("#cancelar-proceso").on("click", function (e)
