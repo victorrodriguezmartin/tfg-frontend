@@ -16,8 +16,12 @@ $(document).ready(function()
     const BANNER_INVALID_KILO_INPUT = "Introduce un valor de kilos entre 0 y 99999 kgs.";
     const BANNER_DUPLICATE_ID_INPUT = "El valor introducido en ID ya está en uso.";
 
-    var listaIncidencias = [];
-    poblarListaIncidencias();
+    if (findParameter("tipo") === "incidencia")
+    {
+        var listaIncidencias = [];
+        displayListaIncidencia();
+        poblarListaIncidencias();
+    }
 
     $("#finalizar-proceso").on("click", function(e)
     {
@@ -26,6 +30,19 @@ $(document).ready(function()
         if (!validarKilos($("#kilosTeoricos").val()) || !validarKilos($("#kilosReales").val()))
             return displayBanner(BANNER_ERROR, BANNER_INVALID_KILO_INPUT);
 
+        if (findParameter("tipo") === "incidencia")
+            return finalizarProcesoIncidencia();
+        
+        return finalizarProcesoPeso();
+    });
+
+    $("#cancelar-proceso").on("click", function(e)
+    {
+        window.location.replace("http://localhost/frontend/src/");
+    });
+
+    function finalizarProcesoIncidencia()
+    {
         $.ajax({
             url: 'http://localhost/backend/src/Server.php',
             data: {
@@ -53,12 +70,60 @@ $(document).ready(function()
                     displayBanner(BANNER_ERROR, result.data);
             }
         });
-    });
+    }
 
-    $("#cancelar-proceso").on("click", function(e)
+    function finalizarProcesoPeso()
     {
-        window.location.replace("http://localhost/frontend/src/");
-    });
+        $.ajax({
+            url: 'http://localhost/backend/src/Server.php',
+            data: {
+                request: "addProcesoPeso",
+                linea: findParameter("linea"),
+                producto: findParameter("producto"),
+                jefe: findParameter("jefe"),
+                kilosTeoricos: $("#kilosTeoricos").val(),
+                kilosReales: $("#kilosReales").val(),
+                idPersonalizado: $("#idPersonalizado").val(),
+                fecha: findParameter("fecha"),
+                horaInicio: findParameter("hora"),
+                pesoProduccion: findParameter("pesoProduccion"),
+                pesoBobina: findParameter("pesoBobina"),
+                pesoTotalBobina: findParameter("pesoTotalBobina"),
+                pesoCubeta: findParameter("pesoCubeta"),
+                pesoBobinaCubeta: findParameter("pesoBobinaCubeta"),
+                pesoUnitarioObjetivo: findParameter("pesoUnitarioObjetivo"),
+                numeroUnidades: findParameter("numeroUnidades"),
+                numeroCubetas: findParameter("numeroCubetas"),
+                margenSobrepeso: findParameter("margenSobrepeso"),
+                margenSubpeso: findParameter("margenSubpeso"),
+                tolerancia1: findParameter("tolerancia1"),
+                tolerancia2: findParameter("tolerancia2"),
+                tolerancia3: findParameter("tolerancia3"),
+                tolerancia4: findParameter("tolerancia4"),
+                tolerancia5: findParameter("tolerancia5"),
+                tolerancia6: findParameter("tolerancia6"),
+                tolerancia7: findParameter("tolerancia7")
+            },
+            type: 'post',
+            success: function(result)
+            {
+                result = JSON.parse(result);
+                
+                if (result.code == 200)
+                    window.location.replace("http://localhost/frontend/src/");
+                if (result.data.includes("1062"))
+                    displayBanner(BANNER_ERROR, BANNER_DUPLICATE_ID_INPUT);
+                else
+                    displayBanner(BANNER_ERROR, result.data);
+            }
+        });
+    }
+
+    function displayListaIncidencia()
+    {
+        $("#type-container").append(
+          "<div id='listaIncidencias' class='col-4 mt-4 bg-light border rounded-2'></div>");
+    }
 
     function poblarListaIncidencias()
     {
@@ -134,3 +199,4 @@ $(document).ready(function()
         banner.html("<span>Placeholder</span>");
     }
 });
+
