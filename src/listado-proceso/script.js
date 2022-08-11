@@ -27,12 +27,10 @@ $(document).ready(function()
         
         if (tipoBusqueda === "peso")
         {
-            var datos = "";
-
             if (!terminoBusqueda)
-                datos = httpGetRequest(GET_PROCESO_PESO);
+                var datos = httpGetRequest(GET_PROCESO_PESO);
             else
-                datos = httpGetRequest(GET_PROCESO_PESO_BY_ID + terminoBusqueda);
+                var datos = httpGetRequest(GET_PROCESO_PESO_BY_ID + terminoBusqueda);
 
             var html = crearHTMLProcesoPeso(datos["data"]);
         }
@@ -78,7 +76,7 @@ $(document).ready(function()
     {
         const iterator = procesos.keys();
 
-        procesos.forEach(element => {
+        procesos.forEach(() => {
             var id = iterator.next().value;
             var datos = getDatosProceso(id, incidencias);
             $("#list").append(crearHTMLProceso(datos, "incidencia"));
@@ -114,7 +112,9 @@ $(document).ready(function()
             $("#entrada-" + datos["id"] + " button").on("click", function(e)
             {
                 e.preventDefault();
-                window.location.replace("http://localhost/frontend/src/detalles-peso/index.html");
+                window.location.replace("http://localhost/frontend/src/detalles-peso/index.html?&" +
+                    "&datos=" + JSON.stringify(datos) + 
+                    "&datosPeso=" + JSON.stringify(element));
             });
         });
     }
