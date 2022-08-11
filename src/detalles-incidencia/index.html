@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="author" content="Victor Rodriguez">
+        <meta name="description" content="Sistema Producción CODAN">
+
+        <title>Sistema Producción CODAN</title>
+
+        <script src="../../libs/jquery-3.6.0/jquery.min.js"></script>
+        <script src="../../libs/bootstrap-5.2.0/bootstrap.min.js"></script>
+
+        <link rel="stylesheet" href="../../libs/bootstrap-5.2.0/bootstrap.min.css"/>
+    </head>
+    <body>
+        <div class="container">
+            <div class="my-5 text-center">
+                <h1>Listado de Procesos de Producción</h1>
+                <h3 class="mt-4">Información Incidencias</h3>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <div id="banner" class="alert invisible">
+                        <span>Placeholder</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <h3 id="idPersonalizado">ID Personalizado: </h3>
+                </div>
+                <div class="col">
+                    <h5 id="jefe">Jefe: </h5>
+                    <h5 id="linea">Linea: </h5>
+                    <h5 id="producto">Producto: </h5>
+                </div>
+                <div class="col">
+                    <h5 id="fecha">Fecha: </h5>
+                    <h5 id="horaInicio">Hora Inicio: </h5>
+                    <h5 id="horaFin">Hora Fin: </h5>
+                </div>
+                <div class="col-2 align-self-center">
+                    <button id="volver" class="btn btn-danger" type="submit">
+                        Volver
+                    </button>
+                </div>
+            </div>
+
+            <br />
+            <hr />
+            <br />
+
+            <div class="row">
+                <h3>Incidencias de Produccion</h3>
+                <table class="table table-striped table-bordered table-responsive">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Descripcion</th>
+                            <th scope="col">Hora Parada</th>
+                            <th scope="col">Hora Reinicio</th>
+                            <th scope="col">Minutos Perdidos</th>
+                        </tr>
+                    </thead>
+                    <tbody id="lista">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+    <script src="./script.js"></script>
+</html>

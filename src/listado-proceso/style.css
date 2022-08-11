@@ -1,10 +1,4 @@
 
-button {
-    width: 31%;
-    min-width: 31%;
-    max-width: 31%;
-}
-
 #list {
     height: 60vh;
     min-height: 60vh;
@@ -16,8 +10,13 @@ button {
 }
 
 .entrada-lista {
-    height: auto;
+    height: auto !important;
+    min-height: auto !important;
+    max-height: auto !important;
 }
 
-
-
+.button-31 {
+    width: 31%;
+    min-width: 31%;
+    max-width: 31%;
+}
