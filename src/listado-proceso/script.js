@@ -24,12 +24,15 @@ $(document).ready(function()
             crearHTMLProcesoIncidencia(procesos, incidencias);
         }
 
+        
         if (tipoBusqueda === "peso")
         {
+            var datos = "";
+
             if (!terminoBusqueda)
-            var datos = httpGetRequest(GET_PROCESO_PESO);
-        else
-            var datos = httpGetRequest(GET_PROCESO_PESO_BY_ID + terminoBusqueda);
+                datos = httpGetRequest(GET_PROCESO_PESO);
+            else
+                datos = httpGetRequest(GET_PROCESO_PESO_BY_ID + terminoBusqueda);
 
             var html = crearHTMLProcesoPeso(datos["data"]);
         }
@@ -171,7 +174,7 @@ $(document).ready(function()
 
     function calcularEficiencia(kilosReales, kilosTeoricos)
     {
-        return kilosReales / kilosTeoricos;
+        return (kilosReales / kilosTeoricos).toFixed(4);
     }
 
     function findParameter(name, throwError)
