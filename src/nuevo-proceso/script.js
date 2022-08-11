@@ -33,7 +33,6 @@ $(document).ready(function()
             var values = httpGetRequest(getRequestURL("getProductos"));
             populateSelect($(this), values, "codigo");
         }
-
     });
 
     $("#proceso-incidencia").on("click", function (e)

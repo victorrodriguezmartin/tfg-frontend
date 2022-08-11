@@ -21,7 +21,7 @@ $(document).ready(function()
                 " [" + BANNER_INVALID_DATA_NAME + "]");
         }
         
-        window.location.replace("http://localhost/frontend/src/terminar-proceso/index.html?" + 
+        window.location.replace("http://localhost/frontend/src/proceso-peso-produccion/index.html?" + 
             "&tipo=" + "peso" +
             "&jefe=" + findParameter("jefe") + 
             "&linea=" + findParameter("linea") +
@@ -30,7 +30,6 @@ $(document).ready(function()
             "&hora=" + findParameter("hora") +
             "&fecha=" + findParameter("fecha") +
             "&horaInicio=" + findParameter("hora") +
-            "&pesoProduccion=" + $("#pesoProduccion").val() +
             "&pesoBobina=" + $("#pesoBobina").val() +
             "&pesoTotalBobina=" + $("#pesoTotalBobina").val() +
             "&pesoCubeta=" + $("#pesoCubeta").val() +
@@ -72,7 +71,6 @@ $(document).ready(function()
         ];
 
         var reales = [
-            $("#pesoProduccion"),
             $("#pesoBobina"),
             $("#pesoTotalBobina"),
             $("#pesoCubeta"),
@@ -153,7 +151,6 @@ $(document).ready(function()
 
     function poblarValoresPorDefecto()
     {
-        $("#pesoProduccion").val("");
         $("#numeroUnidades").val("5");
         $("#pesoBobina").val("0.75");
         $("#pesoTotalBobina").val("3.75");

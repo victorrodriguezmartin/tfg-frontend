@@ -1,0 +1,9 @@
+
+#listaPesos
+{
+    overflow: scroll;
+
+    height: 50vh;
+    min-height: 50vh;
+    max-height: 50vh;
+}

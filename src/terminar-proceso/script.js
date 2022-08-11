@@ -1,15 +1,6 @@
 
 $(document).ready(function()
 {
-    // TODO: REMOVE BEFORE UPLOADING! (FROM HERE)
-    var TEST_TEXT_VALUE_1 = "Azul";
-    $("#idPersonalizado").val(TEST_TEXT_VALUE_1);
-    var TEST_INT_VALUE_1 = "3000";
-    $("#kilosTeoricos").val(TEST_INT_VALUE_1);
-    var TEST_INT_VALUE_2 = "2500";
-    $("#kilosReales").val(TEST_INT_VALUE_2);
-    // TODO: REMOVE BEFORE UPLOADING! (TO HERE)
-
     const BANNER_ERROR = "alert-danger";
     const BANNER_SUCCESS = "alert-success";
 
@@ -21,6 +12,11 @@ $(document).ready(function()
         var listaIncidencias = [];
         displayListaIncidencia();
         poblarListaIncidencias();
+    }
+    else
+    {
+        var listaPesos = [];
+        poblarListaPesos();
     }
 
     $("#finalizar-proceso").on("click", function(e)
@@ -61,7 +57,6 @@ $(document).ready(function()
             success: function(result)
             {
                 result = JSON.parse(result);
-
                 if (result.code == 200)
                     window.location.replace("http://localhost/frontend/src/");
                 else if (result.data.includes("1062"))
@@ -102,7 +97,8 @@ $(document).ready(function()
                 tolerancia4: findParameter("tolerancia4"),
                 tolerancia5: findParameter("tolerancia5"),
                 tolerancia6: findParameter("tolerancia6"),
-                tolerancia7: findParameter("tolerancia7")
+                tolerancia7: findParameter("tolerancia7"),
+                lista: listaPesos
             },
             type: 'post',
             success: function(result)
@@ -145,6 +141,14 @@ $(document).ready(function()
         }
     }
 
+    function poblarListaPesos()
+    {
+        findParameter("lista").split(",").forEach(element =>
+        {
+            listaPesos.push(element);
+        });
+    }
+
     function crearEntradaLista(incidencia)
     {
         return ((listaIncidencias.length > 1) ?  '<hr />' : '') +
@@ -175,6 +179,8 @@ $(document).ready(function()
 
     function validarKilos(kilos)
     {
+        if (!kilos) return false;
+
         return new RegExp("^0*[0-9]{0,4}([.,][0-9]{0,3})?$").test(kilos);
     }
 

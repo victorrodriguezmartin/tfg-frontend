@@ -1,15 +1,6 @@
 
 $(document).ready(function()
 {
-    // TODO: REMOVE BEFORE UPLOADING! (FROM HERE)
-    var TEST_TEXT_VALUE_1 = "TEST";
-    $("#descripcionIncidencia").val(TEST_TEXT_VALUE_1);
-    var TEST_INT_VALUE_1 = "15:30";
-    $("#horaParada").val(TEST_INT_VALUE_1);
-    var TEST_INT_VALUE_2 = "16:00";
-    $("#horaReinicio").val(TEST_INT_VALUE_2);
-    // TODO: REMOVE BEFORE UPLOADING! (TO HERE)
-
     var listaIncidencias = [];
 
     const BANNER_ERROR = "alert-danger";
@@ -25,8 +16,8 @@ $(document).ready(function()
     {
         hideBanner();
 
-        var hParada = $("#horaParada").val().padStart(2, '0');
-        var hReinicio = $("#horaReinicio").val().padStart(2, '0');
+        var hParada = $("#horaParada").val().split(":")[0].padStart(2, 0) + ":" + $("#horaParada").val().split(":")[1];
+        var hReinicio = $("#horaReinicio").val().split(":")[0].padStart(2, 0) + ":" + $("#horaReinicio").val().split(":")[1];
 
         if ($("#descripcionIncidencia").val() == "")
             return displayBanner(BANNER_ERROR, EMPTY_DESCRIPTION);
@@ -45,12 +36,6 @@ $(document).ready(function()
         listaIncidencias.push(incidencia);
         $("#listaIncidencias").append(crearEntradaLista(incidencia));
         displayBanner(BANNER_SUCCESS, SUCCESSFULL_INCIDENCE_CREATION);
-
-        // TODO: REMOVE BEFORE UPLOADING! (FROM HERE)
-        $("#incidenciaText").val(TEST_TEXT_VALUE_1);
-        $("#horaParada").val(TEST_INT_VALUE_1);
-        $("#horaReinicio").val(TEST_INT_VALUE_2);
-        // TODO: REMOVE BEFORE UPLOADING! (TO HERE)
     });
 
     $("#cerrar-formulario").on("click", function(e)
