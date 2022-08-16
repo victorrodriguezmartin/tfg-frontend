@@ -128,6 +128,7 @@ $(document).ready(function()
             {
                 return proceso = {
                     "id" : id,
+                    "id_proceso_peso" : element.id_proceso_peso,
                     "hora_inicio" : element.hora_inicio,
                     "hora_fin" : element.hora_fin,
                     "jefe" : element.jefe,
@@ -177,7 +178,7 @@ $(document).ready(function()
         return (kilosReales / kilosTeoricos).toFixed(4);
     }
 
-    function findParameter(name, throwError)
+    function findParameter(name)
     {
         var paramList = window.location.search.substring(1).split("&");
 
@@ -188,9 +189,5 @@ $(document).ready(function()
             if (current[0] == name)
                 return current[1];
         }
-
-        if (!throwError) return null;
-
-        return addError("Parameter '" + name + "' is missing!");
     }
 });

@@ -10,6 +10,7 @@
         <title>Sistema Producción CODAN</title>
 
         <script src="../../libs/jquery-3.6.0/jquery.min.js"></script>
+        <script src="../../libs/chart.js-3.9.1/chart.min.js"></script>
         <script src="../../libs/bootstrap-5.2.0/bootstrap.min.js"></script>
 
         <link rel="stylesheet" href="../../libs/bootstrap-5.2.0/bootstrap.min.css"/>
@@ -51,26 +52,42 @@
             </div>
 
             <br />
-            <hr />
-            <br />
 
             <div class="row">
-                <h3>Incidencias de Produccion</h3>
-                <table class="table table-striped table-bordered table-responsive">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Peso Unidad</th>
-                            <th scope="col">Peso Caja</th>
-                            <th scope="col">Peso Objetivo</th>
-                            <th scope="col">Margen Subpeso</th>
-                            <th scope="col">Margen Sobrepeso</th>
-                            <th scope="col">Veredicto</th>
-                        </tr>
-                    </thead>
-                    <tbody id="lista">
-                    </tbody>
-                </table>
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a id="btn-lista" class="nav-link active" aria-current="page" href="#">Lista</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="btn-grafica" class="nav-link" href="#">Grafica</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div id="lista-container">
+                <br />
+                <div class="row">
+                    <table class="table table-striped table-bordered table-responsive">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Peso Unidad</th>
+                                <th scope="col">Peso Caja</th>
+                                <th scope="col">Peso Objetivo</th>
+                                <th scope="col">Margen Subpeso</th>
+                                <th scope="col">Margen Sobrepeso</th>
+                                <th scope="col">Veredicto</th>
+                            </tr>
+                        </thead>
+                        <tbody id="lista">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="grafica-container"  style="display:none">
+                <br />
+                <canvas id="grafica" width="150" height="50"></canvas>
             </div>
         </div>
     </body>
