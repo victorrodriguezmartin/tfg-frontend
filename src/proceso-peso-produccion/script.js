@@ -11,10 +11,13 @@ $(document).ready(function()
 
     var listaPesos = [];
 
+    
     $("#guardar-peso").on("click", function(e)
     {
         hideBanner();
-
+        $("#hora").val(getTime());
+        
+        var hora = $("#hora").val();
         var peso = $("#pesoProduccion").val();
 
         if (peso == "")
@@ -23,8 +26,8 @@ $(document).ready(function()
         if (!validarPeso(peso))
             return displayBanner(BANNER_ERROR, BANNER_INVALID_DATA);
         
-        listaPesos.push(peso);
-        $("#listaPesos").append(crearEntradaLista(peso));
+        listaPesos.push({peso:peso, hora:hora});
+        $("#listaPesos").append(crearEntradaLista(peso, hora));
         displayBanner(BANNER_SUCCESS, SUCCESSFULL_WEIGHT_INPUT);
 
         $("#pesoProduccion").val("");
@@ -32,16 +35,6 @@ $(document).ready(function()
 
     $("#cerrar-formulario").on("click", function(e)
     {
-        var lista = "";
-        
-        var first = true;
-
-        for (var i in listaPesos)
-        {
-            lista += (first ? "" : ",") + listaPesos[i];
-            first = false;
-        }
-
         window.location.replace("http://localhost/frontend/src/terminar-proceso/index.html?" + 
             "&tipo=" + "peso" +
             "&jefe=" + findParameter("jefe") + 
@@ -67,7 +60,7 @@ $(document).ready(function()
             "&tolerancia5=" + findParameter("tolerancia5") +
             "&tolerancia6=" + findParameter("tolerancia6") +
             "&tolerancia7=" + findParameter("tolerancia7") + 
-            "&lista=" + lista);
+            "&lista=" + JSON.stringify(listaPesos));
     });
 
     $("#cancelar-formulario").on("click", function(e)
@@ -76,11 +69,12 @@ $(document).ready(function()
         window.location.replace("http://localhost/frontend/src");
     });
 
-    function crearEntradaLista(peso)
+    function crearEntradaLista(peso, hora)
     {
         return ((listaPesos.length > 1) ?  '<hr />' : '') +
                '<div class="mt-2">' +
                '    <h5>Peso: ' + peso + '</h5>'  +
+               '    <h6>Hora: ' + hora + '</h6>'  +
                '</div>';
     }
 
@@ -123,5 +117,20 @@ $(document).ready(function()
         }
 
         displayBanner(BANNER_ERROR, INTERNAL_ERROR);
+    }
+
+    function httpGetRequest(url)
+    {
+        var xmlHttp = new XMLHttpRequest();
+        
+        xmlHttp.open("GET", url, false);
+        xmlHttp.send();
+
+        return JSON.parse(xmlHttp.responseText);
+    }
+
+    function getTime()
+    {
+        return httpGetRequest("http://localhost/backend/src/Server.php?request=getTime")["data"];
     }
 });

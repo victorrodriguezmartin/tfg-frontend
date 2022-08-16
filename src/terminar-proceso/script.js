@@ -98,7 +98,7 @@ $(document).ready(function()
                 tolerancia5: findParameter("tolerancia5"),
                 tolerancia6: findParameter("tolerancia6"),
                 tolerancia7: findParameter("tolerancia7"),
-                lista: listaPesos
+                lista: decodeURIComponent(listaPesos)
             },
             type: 'post',
             success: function(result)
