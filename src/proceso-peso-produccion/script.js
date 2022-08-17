@@ -10,7 +10,7 @@ $(document).ready(function()
     const SUCCESSFULL_WEIGHT_INPUT = "Peso añadida con éxito a la lista!";
 
     var listaPesos = [];
-
+    $("#hora").val(getTime());
     
     $("#guardar-peso").on("click", function(e)
     {

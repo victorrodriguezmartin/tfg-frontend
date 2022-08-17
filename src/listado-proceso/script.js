@@ -1,39 +1,34 @@
 
 $(document).ready(function()
 {
-    const GET_PROCESO_PESO = "http://localhost/backend/src/Server.php?request=getProcesosPeso"
-    const GET_PROCESO_PESO_BY_ID = "http://localhost/backend/src/Server.php?request=getProcesosPesoById&id="
-    const GET_PROCESO_INCIDENCIAS = "http://localhost/backend/src/Server.php?request=getProcesosIncidencia"
-    const GET_PROCESO_INCIDENCIAS_BY_ID = "http://localhost/backend/src/Server.php?request=getProcesosIncidenciaById&id="
+    const GET_PROCESO_PESO = "http://localhost/backend/src/Server.php?request=getProcesosPeso";
+    const GET_PROCESO_INCIDENCIAS = "http://localhost/backend/src/Server.php?request=getProcesosIncidencia";
+
+    if (findParameter("tipoBusqueda") === "peso")
+    {
+        $('option[value=incidencia]').prop('selected', false);
+        $('option[value=peso]').prop('selected', true);
+
+        buscarPesos(findParameter("terminoBusqueda"));
+    }
+    else
+    {
+        $('option[value=incidencia]').prop('selected', true);
+        $('option[value=peso]').prop('selected', false);
+
+        buscarIncidencias(findParameter("terminoBusqueda"));
+    }
 
     $("#buscar").on("click", function(e)
     {
         $("#list").empty();
 
-        var tipoBusqueda = $("#tipo-busqueda").val();
         var terminoBusqueda = $("#termino-busqueda").val();
 
-        if (tipoBusqueda === "incidencias")
-        {
-            if (!terminoBusqueda)
-                var incidencias = httpGetRequest(GET_PROCESO_INCIDENCIAS)["data"];
-            else
-                var incidencias = httpGetRequest(GET_PROCESO_INCIDENCIAS_BY_ID + terminoBusqueda)["data"];
-            
-            var procesos = agruparIncidenciasPorId(incidencias);
-            crearHTMLProcesoIncidencia(procesos, incidencias);
-        }
-
-        
-        if (tipoBusqueda === "peso")
-        {
-            if (!terminoBusqueda)
-                var datos = httpGetRequest(GET_PROCESO_PESO);
-            else
-                var datos = httpGetRequest(GET_PROCESO_PESO_BY_ID + terminoBusqueda);
-
-            var html = crearHTMLProcesoPeso(datos["data"]);
-        }
+        if ($("#tipo-busqueda").val() === "incidencias")
+            buscarIncidencias(terminoBusqueda);
+        else 
+            buscarPesos(terminoBusqueda);
     });
 
     $("#volver").on("click", function(e)
@@ -41,6 +36,23 @@ $(document).ready(function()
         e.preventDefault();
         window.location.replace("http://localhost/frontend/src");
     });
+
+    function buscarIncidencias(terminoBusqueda)
+    {
+        var datos = httpGetRequest(GET_PROCESO_INCIDENCIAS + 
+            (!terminoBusqueda ? "" : "ById&id=" + terminoBusqueda))["data"];
+        
+        var procesos = agruparIncidenciasPorId(datos);
+        crearHTMLProcesoIncidencia(procesos, datos);
+    }
+
+    function buscarPesos(terminoBusqueda)
+    {
+        var datos = httpGetRequest(GET_PROCESO_PESO + 
+            (!terminoBusqueda ? "" : "ById&id=" + terminoBusqueda))["data"];
+
+        crearHTMLProcesoPeso(datos);
+    }
 
     function crearHTMLProceso(datos, tipo)
     {
@@ -85,6 +97,7 @@ $(document).ready(function()
             {
                 e.preventDefault();
                 window.location.replace("http://localhost/frontend/src/detalles-incidencia/index.html?" + 
+                    "&terminoBusqueda=" + $("#termino-busqueda").val() + 
                     "&incidencias=" + JSON.stringify(filtrarIncidencias(id, incidencias)));
             });
         });
@@ -113,6 +126,7 @@ $(document).ready(function()
             {
                 e.preventDefault();
                 window.location.replace("http://localhost/frontend/src/detalles-peso/index.html?&" +
+                    "&terminoBusqueda=" + $("#termino-busqueda").val() + 
                     "&datos=" + JSON.stringify(datos) + 
                     "&datosPeso=" + JSON.stringify(element));
             });
