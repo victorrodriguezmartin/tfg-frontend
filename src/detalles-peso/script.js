@@ -7,7 +7,7 @@ $(document).ready(function()
     var datos = JSON.parse(decodeURIComponent(findParameter("datos")));
     var datosPeso = JSON.parse(decodeURIComponent(findParameter("datosPeso")));
     var pesos = httpGetRequest(GET_PESOS_UNITARIOS + datos["id_proceso_peso"])["data"];
-    
+
     rellenarCampos();
     rellenarGrafica();
 
@@ -58,7 +58,6 @@ $(document).ready(function()
             $("#lista").append($("<tr>" +
               "    <th scope='row'>" + (index + 1) + "</th>" +
               "    <td>" + pesoUnidad + "</td>" +
-              "    <td>" + element["peso"] + "</td>" +
               "    <td>" + pesoObjetivo + "</td>" +
               "    <td>" + margenSubpeso + "%</td>" +
               "    <td>" + margenSobrepeso + "%</td>" +

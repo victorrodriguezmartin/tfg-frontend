@@ -31,6 +31,12 @@ $(document).ready(function()
             buscarPesos(terminoBusqueda);
     });
 
+    $("#descargar").on("click", function(e)
+    {
+        e.preventDefault();
+        window.location.replace("http://localhost/frontend/src/descarga-json/index.html");
+    });
+
     $("#volver").on("click", function(e)
     {
         e.preventDefault();

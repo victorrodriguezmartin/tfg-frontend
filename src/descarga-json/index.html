@@ -1,0 +1,103 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="author" content="Victor Rodriguez">
+        <meta name="description" content="Sistema Producción CODAN">
+
+        <title>Sistema Producción CODAN</title>
+
+        <script src="../../libs/jquery-3.6.0/jquery.min.js"></script>
+    </head>
+    <body>
+        <div id="container"></div>
+    </body>
+    <script>
+        $(document).ready(function()
+        {
+            const GET_PROCESO_PESO = "http://localhost/backend/src/Server.php?request=getProcesosPeso";
+            const GET_TOLERANCIAS_BY_ID = "http://localhost/backend/src/Server.php?request=getToleranciasById&id="
+            const GET_PROCESO_INCIDENCIAS = "http://localhost/backend/src/Server.php?request=getProcesosIncidencia";
+            
+            $("#container").html('{"procesos_peso":' + convertirPesosAJson() +
+                       ',"procesos_incidencia":' + convertirIncidenciasAJson() + '}');
+
+            function convertirIncidenciasAJson()
+            {
+                var result = {};
+                var map = new Map();
+                var incidencias = httpGetRequest(GET_PROCESO_INCIDENCIAS)["data"];
+
+                incidencias.forEach(element => {
+                    var nuevo = {
+                        descripcion: element.descripcion,
+                        horaParada: element.horaParada,
+                        horaReinicio: element.horaParada
+                    };
+
+                    if (!map.has(element.id_personalizado))
+                        map.set(element.id_personalizado, []);
+
+                    map.get(element.id_personalizado).push(nuevo);
+                });
+
+                result = Object.fromEntries(map);
+
+                return JSON.stringify(result);
+            }
+
+            function convertirPesosAJson()
+            {
+                var result = {};
+                var pesos = httpGetRequest(GET_PROCESO_PESO)["data"];
+                var incidencias = httpGetRequest(GET_PROCESO_PESO)["data"];
+
+                pesos.forEach((element) =>
+                {
+                    var tolerancias = httpGetRequest(GET_TOLERANCIAS_BY_ID + element.id_tolerancias)["data"][0];
+
+                    var datos = {
+                        jefe: element.jefe,
+                        linea: element.linea,
+                        producto: element.producto,
+                        kilos_reales: element.kilos_reales,
+                        kilos_teoricos: element.kilos_teoricos,
+                        numero_cubetas: element.numero_cubetas,
+                        numero_unidades: element.numero_unidades,
+                        peso_objetivo: element.peso_objetivo,
+                        peso_cubetas: element.peso_cubetas,
+                        peso_bobinas: element.peso_bobinas,
+                        peso_total_bobina: element.peso_total_bobina,
+                        peso_bobina_cubetas: element.peso_bobina_cubetas,
+                        margen_subpeso: element.margen_subpeso,
+                        margen_sobrepeso: element.margen_sobrepeso,
+                        tolerancia_1: tolerancias.tolerancia_1,
+                        tolerancia_2: tolerancias.tolerancia_2,
+                        tolerancia_3: tolerancias.tolerancia_3,
+                        tolerancia_4: tolerancias.tolerancia_4,
+                        tolerancia_5: tolerancias.tolerancia_5,
+                        tolerancia_6: tolerancias.tolerancia_6,
+                        tolerancia_7: tolerancias.tolerancia_7
+                    };
+                    
+                    result[element.id_personalizado] = datos;
+                });
+
+                return JSON.stringify(result).replaceAll(" ", "_");
+            }
+
+            function httpGetRequest(url)
+            {
+                var xmlHttp = new XMLHttpRequest();
+
+                xmlHttp.open("GET", url, false);
+                xmlHttp.send();
+                
+                return JSON.parse(xmlHttp.responseText);
+            }
+        });
+    </script>
+</html>
+
