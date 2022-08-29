@@ -10,10 +10,68 @@
         <title>Sistema Producción CODAN</title>
 
         <script src="../../libs/jquery-3.6.0/jquery.min.js"></script>
+        <script src="../../libs/bootstrap-5.2.0/bootstrap.min.js"></script>
+
+        <link rel="stylesheet" href="../../libs/bootstrap-5.2.0/bootstrap.min.css"/>
     </head>
     <body>
-        <div id="container"></div>
+        <div id="container">
+            <div class="my-5 text-center">
+                <h1>Listado de Procesos de Producción</h1>
+                <h3 class="mt-4">Descarga cadena JSON</h3>
+            </div>
+
+            <div class="row" class="col mx-auto border bg-light rounded-2">
+                
+            </div>
+
+            <div class="row">
+                <div id="json-container" class="col mx-auto border bg-light rounded-2">
+                    <div id="json">
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-md-center my-3">
+                <div class="col-5"></div>
+                <div class="col-1">
+                    <button id="copiar" class="col btn btn-primary">
+                        Copiar
+                    </button>
+                </div>
+                <div class="col-1">
+                    <button id="volver" class="col btn btn-danger">
+                        Volver
+                    </button>
+                </div>
+                <div class="col-5"></div>
+            </div>
+        </div>
     </body>
+    <style>
+        #json-container {
+            width: 100vh;
+            min-width: 100vh;
+            max-width: 100vh;
+
+            height: 30vh;
+            min-height: 30vh;
+            max-height: 30vh;
+
+            margin-top: 1vh;
+
+            overflow: scroll;
+        }
+
+        button {
+            width: 15vh;
+            min-width: 15vh;
+            max-width: 15vh;
+        }
+
+        #copiar  {
+            margin-right: 100px;
+        }
+    </style>
     <script>
         $(document).ready(function()
         {
@@ -21,8 +79,29 @@
             const GET_TOLERANCIAS_BY_ID = "http://localhost/backend/src/Server.php?request=getToleranciasById&id="
             const GET_PROCESO_INCIDENCIAS = "http://localhost/backend/src/Server.php?request=getProcesosIncidencia";
             
-            $("#container").html('{"procesos_peso":' + convertirPesosAJson() +
+            $("#json").html('{"procesos_peso":' + convertirPesosAJson() +
                        ',"procesos_incidencia":' + convertirIncidenciasAJson() + '}');
+
+            $("#copiar").on("click", function(e)
+            {
+                var temp = $("<input>");
+                var value = $("#json").text();
+
+                $("body").append(temp);
+                temp.val(value).select();
+                document.execCommand("copy");
+                temp.remove();
+
+                // $("body").append(json);
+                // json.val(value).select();
+                // document.execCommand("copy");
+                // json.remove();
+            });
+
+            $("#volver").on("click", function(e)
+            {
+                window.location.replace("http://localhost/frontend/src/listado-proceso/index.html");
+            });
 
             function convertirIncidenciasAJson()
             {
